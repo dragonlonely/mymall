@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dragon.xiaomi.mapper.UserMapper">
+
+    <sql id="getallusersql">
+        select id,username,password,email,gender,flag,role,code,phone,passwordSalt,createtime,logintime,updatetime,ipaddress from tb_user
+    </sql>
+
+    <insert id="addUser" parameterType="com.dragon.xiaomi.user.pojo.User">
+        INSERT INTO tb_user (username,password,email,gender,flag,role,code,phone,passwordSalt,createtime,logintime,updatetime,ipaddress) VALUES (#{username},#{password},#{email},#{gender},#{flag},#{role},#{code},#{phone},#{passwordSalt},#{createtime},#{logintime},#{updatetime},#{ipaddress})
+    </insert>
+
+    <select id="checkUserName" resultType="int" parameterType="string">
+
+        select count(id) from tb_user where username=#{username}
+    </select>
+
+    <select id="findUserByUsernameAndPassword" resultType="com.dragon.xiaomi.user.pojo.User">
+
+        <include refid="getallusersql"/>
+        <where>
+            <if test="username!=null">
+               and username=#{username}
+            </if>
+            <if test="password!=null">
+                and password=#{password}
+            </if>
+
+        </where>
+
+       <!--
+        select id,username,password,email,gender,flag,role,code,phone from tb_user where  username=#{username} and password=#{password}
+       -->
+
+    </select>
+
+    <update id="modifyPwd" parameterType="com.dragon.xiaomi.user.pojo.User">
+        update tb_user set username=#{username},password=#{password},email=#{email},gender=#{gender},flag=#{flag},role=#{role},code=#{code},phone=#{phone} where id=#{id}
+    </update>
+
+    <select id="findAllUser" resultType="com.dragon.xiaomi.user.pojo.User" parameterType="string">
+        select id,username,password,email,gender,flag,role,code,phone from tb_user where username=#{username} and gender=#{gender}
+
+    </select>
+
+    <select id="getUserList" resultType="com.dragon.xiaomi.user.pojo.User">
+        select id,username,password,email,gender,flag,role,code,phone from tb_user where flag!=2
+
+    </select>
+
+    <select id="getInvalidUserList" resultType="com.dragon.xiaomi.user.pojo.User">
+
+        select id,username,password,email,gender,flag,role,code,phone from tb_user where flag=2
+    </select>
+
+    <update id="delete" parameterType="integer">
+        update tb_user set flag=2 where id=#{userid}
+    </update>
+
+    <select id="findUserNameById" resultType="string" parameterType="integer">
+        select username from tb_user where id=#{uid}
+    </select>
+
+    <select id="getIdByUsername" parameterType="string" resultType="integer">
+        select id from tb_user where username=#{username}
+
+    </select>
+
+    <select id="getPasswordSaltByUsername" resultType="string" parameterType="string">
+        select passwordSalt from tb_user where username=#{username}
+
+    </select>
+
+</mapper>

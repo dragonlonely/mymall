@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+">
+
+    <!--<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">-->
+    <!--<property name="maxIdle" value="10"/>-->
+    <!--<property name="maxWaitMillis" value="3000"/>-->
+    <!--<property name="maxTotal" value="20"/>-->
+    <!--<property name="testOnBorrow" value="true"/>-->
+    <!--</bean>-->
+
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <!--<constructor-arg name="poolConfig" ref="jedisPoolConfig"/>-->
+        <constructor-arg name="host" value="144.34.237.29"></constructor-arg>
+        <constructor-arg name="port" value="8300"></constructor-arg>
+        <!--<constructor-arg name="timeout" value="60000"></constructor-arg>-->
+        <!--<constructor-arg name="password" value="123456"></constructor-arg>-->
+    </bean>
+
+    <bean class="com.dragon.xiaomi.commons.redis.JedisClientPool">
+        <property name="jedisPool" ref="jedisPool"/>
+    </bean>
+</beans>

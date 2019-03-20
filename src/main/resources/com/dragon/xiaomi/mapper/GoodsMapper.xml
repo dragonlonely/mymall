@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dragon.xiaomi.mapper.GoodsMapper">
+    <select id="getGoodsTypeList" resultType="com.dragon.xiaomi.goods.pojo.GoodsType">
+        SELECT * FROM tb_goods_type WHERE Parent=0
+    </select>
+
+    <select id="getGoodsByTypeId" resultType="com.dragon.xiaomi.goods.pojo.Goods">
+        select * from tb_goods where typeid =#{typeId} order by id limit ${(pageNum-1)*pageSize},${pageSize}
+
+    </select>
+
+    <select id="getCount" parameterType="integer" resultType="long">
+        select count(*) from tb_goods where typeid =#{typeId}
+    </select>
+
+    <select id="getGoodsDetailById" resultType="com.dragon.xiaomi.goods.pojo.Goods" parameterType="int">
+
+         select * from tb_goods where id = #{id}
+
+    </select>
+
+    <select id="getGoodsListByTypeId" resultType="com.dragon.xiaomi.goods.pojo.GoodsType" parameterType="int">
+       select * from tb_goods_type where id=#{typeId}
+    </select>
+
+    <select id="findById" resultType="com.dragon.xiaomi.goods.pojo.Goods" parameterType="int">
+      select * from tb_goods where id=#{id}
+    </select>
+
+    <select id="findByName" parameterType="string" resultType="com.dragon.xiaomi.goods.pojo.Goods">
+        SELECT * FROM tb_goods WHERE name like '%${value}%' ORDER BY id
+
+    </select>
+
+    <insert id="addGoods" parameterType="com.dragon.xiaomi.goods.pojo.Goods">
+        insert into tb_goods(`name`,pubdate,picture,price,star,intro,typeid) values (#{name},#{pubdate},#{picture},#{price},#{star},#{intro},#{typeid})
+    </insert>
+
+    <select id="findAllGoodsType" resultType="com.dragon.xiaomi.goods.pojo.GoodsType">
+
+        select id,`name`,`level`,Parent from tb_goods_type
+    </select>
+
+    <select id="getParentNameByParentId" resultType="string" parameterType="integer">
+        select `name` from tb_goods_type where id=#{parent}
+    </select>
+
+    <select id="fingAllGoods" resultType="com.dragon.xiaomi.goods.pojo.Goods">
+        select id,`name`,pubdate,picture,price,star,intro,typeid from tb_goods
+    </select>
+
+    <select id="findGoodsTypeName" resultType="string" parameterType="integer">
+        select `name` from tb_goods_type where id=#{typeid}
+    </select>
+
+    <insert id="addGoodsType" parameterType="com.dragon.xiaomi.goods.pojo.GoodsType">
+        insert into tb_goods_type(`name`,`level`, Parent) values (#{name},#{level},#{parent})
+    </insert>
+
+    <select id="queryGoods" resultType="com.dragon.xiaomi.goods.pojo.Goods">
+        select id,`name`,pubdate,picture,price,star,intro,typeid from tb_goods
+        <where>
+            <if test="name != null and name != ''">
+                and name LIKE CONCAT(CONCAT('%',#{name},'%'))
+            </if>
+
+            <if test="pubdate != null and pubdate != ''">
+            and pubdate LIKE CONCAT(CONCAT('%',#{pubdate},'%'))
+        </if>
+        </where>
+              ORDER BY id
+
+    </select>
+
+    <delete id="deleteGoodsById" parameterType="integer">
+        delete from tb_goods where id=#{goodsid}
+    </delete>
+
+    <select id="getGoodstyidByTypeName" parameterType="string" resultType="integer">
+        select id from tb_goods_type where `name`=#{typeName}
+    </select>
+
+    <update id="updateGoods">
+        update tb_goods set `name`=#{name},pubdate=#{pubdate},picture=#{picture},price=#{price},star=#{star},intro=#{intro},typeid=#{typeid} where id=#{id}
+    </update>
+    
+</mapper>

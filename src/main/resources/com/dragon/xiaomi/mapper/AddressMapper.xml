@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dragon.xiaomi.mapper.AddressMapper">
+
+    <select id="getAddressList" resultType="com.dragon.xiaomi.address.pojo.Address">
+        select id,detail,`name`,phone,uid,`level` from tb_address where uid=#{uid}
+    </select>
+
+    <update id="defautAdd" parameterType="int">
+        update tb_address
+        <if test="level==0">
+          set level=1 where id=#{id}
+        </if>
+        <if test="level==1">
+          set level=0 where id=#{id}
+        </if>
+    </update>
+
+    <insert id="addAddress" parameterType="com.dragon.xiaomi.address.pojo.Address">
+
+        INSERT INTO tb_address(detail,name,phone,uid,level) VALUES(#{detail},#{name},#{phone},#{uid},#{level})
+    </insert>
+
+    <update id="updateAddress" parameterType="com.dragon.xiaomi.address.pojo.Address">
+
+        update tb_address set detail=#{detail},name=#{name},phone=#{phone} where id=#{id}
+    </update>
+
+    <delete id="deleteAddress">
+
+        delete from tb_address where id=#{id}
+    </delete>
+
+    <select id="findByUserId" parameterType="int" resultType="com.dragon.xiaomi.address.pojo.Address">
+        select * from tb_address where uid=#{id}
+    </select>
+
+    <select id="findByAid" resultType="com.dragon.xiaomi.address.pojo.Address" parameterType="int">
+        select * from tb_address where id=#{aid}
+    </select>
+
+</mapper>

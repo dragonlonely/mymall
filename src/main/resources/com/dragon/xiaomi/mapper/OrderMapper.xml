@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dragon.xiaomi.mapper.OrderMapper">
+
+    <insert id="add" parameterType="com.dragon.xiaomi.order.pojo.Order">
+        insert into tb_order(id,uid,money,status,time,aid) values (#{id},#{uid},#{money},#{status},#{time},#{aid})
+    </insert>
+
+    <insert id="addOrderDetail" parameterType="com.dragon.xiaomi.order.pojo.OrderDetail">
+        insert into tb_orderdetail(oid,pid,num,money) values (#{oid},#{pid},#{num},#{money})
+    </insert>
+
+    <select id="findOrderByUserId" parameterType="int" resultType="com.dragon.xiaomi.order.pojo.Order">
+        SELECT o.*, a.detail as address FROM tb_order o INNER JOIN tb_address a on o.aid=a.id WHERE o.uid=#{id} ORDER BY time DESC
+    </select>
+
+    <select id="findByOid" resultType="com.dragon.xiaomi.order.pojo.OrderDetail" parameterType="string">
+        select * from tb_orderdetail where oid=#{oid}
+    </select>
+
+    <select id="findByOrderid" parameterType="string" resultType="com.dragon.xiaomi.order.pojo.Order">
+        SELECT o.*, a.detail as address FROM tb_order o INNER JOIN tb_address a ON o.aid=a.id WHERE o.id=#{oid}
+    </select>
+
+    <update id="updateStatus" parameterType="string">
+        update tb_order set status=#{status} where id=#{orderId}
+    </update>
+
+    <select id="getOrderList" resultType="com.dragon.xiaomi.order.pojo.Order">
+        select id,uid,money,status,`time`,aid from tb_order
+    </select>
+
+    <select id="getOrder" resultType="com.dragon.xiaomi.order.pojo.Order">
+        select id,uid,money,status,`time`,aid from tb_order
+        <where>
+            <if test="userid != null">
+                and uid=#{userid}
+            </if>
+            <if test="status != null">
+                or status=#{status}
+            </if>
+
+        </where>
+    </select>
+
+</mapper>
