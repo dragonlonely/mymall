@@ -17,7 +17,7 @@ public class LogServiceImpl implements LogService {
     @Autowired
     private LogMapper logMapper;
 
-    @Override
+
     public void addLog(TbLog tbLog) {
         logMapper.addLog(tbLog);
     }

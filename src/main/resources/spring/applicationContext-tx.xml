@@ -24,7 +24,6 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <!--
         配置详情,细粒度的控制
-
         -->
                 <tx:attributes>
                     <tx:method name="find*" read-only="true" propagation="SUPPORTS"/>
@@ -40,8 +39,6 @@
 
 
     <aop:config>
-
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.dragon.xiaomi.*.service..*Impl.*(..))"/>
-
     </aop:config>
 </beans>

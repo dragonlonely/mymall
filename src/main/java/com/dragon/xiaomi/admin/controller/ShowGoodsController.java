@@ -39,7 +39,7 @@ public class ShowGoodsController {
     public String getGoodsList(HttpServletRequest request){
         List<Goods> goodsList = goodsService.fingAllGoods();
         //List<Goods> goodsList = pageInfo.getList();
-        List<ShowGoodsVo> showGoodsVoList=new ArrayList<>();
+        List<ShowGoodsVo> showGoodsVoList=new ArrayList<ShowGoodsVo>();
         for (Goods goods : goodsList) {
             ShowGoodsVo showGoodsVo=new ShowGoodsVo();
             showGoodsVo.setId(goods.getId());
@@ -60,12 +60,12 @@ public class ShowGoodsController {
     }
 
     @RequestMapping("/searchgoodslist")
-    @ResponseBody
-    public List<ShowGoodsVo> searchGoodsList(HttpServletRequest request){
+    public String searchGoodsList(HttpServletRequest request) throws Exception{
+        request.setCharacterEncoding("utf-8");
         String name = request.getParameter("name");
         String pubdate = request.getParameter("pubdate");
         List<Goods> goodsList=goodsService.queryGoods(name,pubdate);
-        List<ShowGoodsVo> showGoodsVoList=new ArrayList<>();
+        List<ShowGoodsVo> showGoodsVoList=new ArrayList<ShowGoodsVo>();
         for (Goods goods : goodsList) {
             ShowGoodsVo showGoodsVo=new ShowGoodsVo();
             showGoodsVo.setId(goods.getId());
@@ -80,8 +80,9 @@ public class ShowGoodsController {
             showGoodsVo.setTypeName(typeName);
             showGoodsVoList.add(showGoodsVo);
         }
+        request.getSession().setAttribute("goodsList", showGoodsVoList);
         logger.info("查询商品!===>"+showGoodsVoList.toString());
-        return showGoodsVoList;
+        return "redirect:/admin/showGoods.jsp";
     }
 
     @RequestMapping("/deleteGoods")

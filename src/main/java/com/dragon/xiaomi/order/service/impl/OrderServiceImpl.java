@@ -38,7 +38,6 @@ public class OrderServiceImpl implements OrderService {
     private UserMapper userMapper;
 
     @Transactional(readOnly = false,propagation = Propagation.REQUIRES_NEW)
-    @Override
     public Order submitOrder(List<Cart> carts, int addid, int uid) {
 
         double totalmoney=0;
@@ -63,12 +62,12 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
-    @Override
+
     public List<Order> findOrderByUserId(int id) {
         return orderMapper.findOrderByUserId(id);
     }
 
-    @Override
+
     public List<OrderDetail> findByOid(String oid) {
         List<OrderDetail> orderDetails = orderMapper.findByOid(oid);
         for(OrderDetail orderDetail:orderDetails){
@@ -78,20 +77,20 @@ public class OrderServiceImpl implements OrderService {
         return orderDetails;
     }
 
-    @Override
+
     public Order findByOrderid(String oid) {
         return orderMapper.findByOrderid(oid);
     }
 
-    @Override
+
     public void updateStatus(String orderId, String status) {
         orderMapper.updateStatus(orderId,status);
     }
 
-    @Override
+
     public List<OrderVo> getAllOrder() {
         //PageHelper.startPage(pageNum, pageSize);
-        List<OrderVo> orderVoList=new ArrayList<>();
+        List<OrderVo> orderVoList=new ArrayList<OrderVo>();
         List<Order> orders=orderMapper.getOrderList();
         for (Order order : orders) {
             OrderVo orderVo=new OrderVo();
@@ -107,9 +106,9 @@ public class OrderServiceImpl implements OrderService {
         return orderVoList;
     }
 
-    @Override
+
     public List<OrderVo> findOrderByUseridOrStatus( String username, String status) {
-        List<OrderVo> orderVoList=new ArrayList<>();
+        List<OrderVo> orderVoList=new ArrayList<OrderVo>();
         int userid = userMapper.getIdByUsername(username);
         List<Order> orders=orderMapper.getOrder(userid,status);
         for (Order order : orders) {

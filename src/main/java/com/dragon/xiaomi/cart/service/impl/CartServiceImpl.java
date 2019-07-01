@@ -22,22 +22,22 @@ public class CartServiceImpl implements CartService {
     private GoodsMapper goodsMapper;
 
 
-    @Override
+
     public Cart findByUserIdAndGoodsId(int id, int pid) {
         return cartMapper.findByUserIdAndGoodsId(id,pid);
     }
 
-    @Override
+
     public void add(Cart cart) {
         cartMapper.add(cart);
     }
 
-    @Override
+
     public void update(Cart cart) {
         cartMapper.update(cart);
     }
 
-    @Override
+
     public List<Cart> getCartById(int id) {
 
         List<Cart> carts = cartMapper.getCartById(id);
@@ -47,12 +47,12 @@ public class CartServiceImpl implements CartService {
         return carts;
     }
 
-    @Override
+
     public void remove(int id, int goodsId) {
         cartMapper.remove(id,goodsId);
     }
 
-    @Override
+
     public void clear(int id) {
         cartMapper.clear(id);
     }

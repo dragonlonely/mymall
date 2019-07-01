@@ -83,6 +83,7 @@
 				商品列表
 			</div>
 			<div class="panel-body">
+				<form action="${pageContext.request.contextPath }/goods/searchgoodslist.action" method="post">
 				<div class="row">
 					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 						<div class="form-group form-inline">
@@ -97,9 +98,12 @@
 						</div>
 					</div>
 					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-						<button type="button" class="btn btn-primary" id="search"><span class="glyphicon glyphicon-search"></span></button>
+						<%--<button type="button" class="btn btn-primary" id="search"><span class="glyphicon glyphicon-search"></span></button>--%>
+							<button type="submit" class="btn btn-primary">查询</button>
 					</div>
+
 				</div>
+				</form>
 				<div style="height: 400px;overflow: scroll;">
 					<table id="tb_list" class="table table-striped table-hover table-bordered">
 						<tr>
@@ -113,7 +117,7 @@
 								<td>${goods.pubdate}</td>
 								<td>${goods.typeName}</td>
 								<td>${goods.intro}</td>
-								<td>
+								<td style="width: 130px">
 									<button onclick="deleteGoods(${goods.id})" class="btn btn-danger btn-sm">删除</button>&nbsp;&nbsp;
 									<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal${goods.id}">修改</button>&nbsp;&nbsp;
 									<!-- 弹出模态框 -->
@@ -161,8 +165,10 @@
 															</div>
 														</div>
 														<div class="form-group">
-															<label>商品图片</label>
-															<input type="file" name="file" />
+															<label class="col-sm-2 control-label">商品图片</label>
+															<div class="col-sm-10">
+																<input type="file" name="file" />
+															</div>
 														</div>
 														<div class="form-group">
 															<label class="col-sm-2 control-label">商品描述</label>

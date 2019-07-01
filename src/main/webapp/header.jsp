@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <script type="text/javascript">
@@ -57,7 +57,7 @@
         <p id="goodsType">
 			<!-- 根据ajax 回调函数 填写数据 到此id中 -->
         </p>
-       <form class="form-inline pull-right" style="margin-top: 40px;margin-right: 10px;" action="${pageContext.request.contextPath }/goods/searchgoods.action" method="get">
+       <form class="form-inline pull-right" style="margin-top: 40px;margin-right: 10px;" action="${pageContext.request.contextPath }/goods/searchgoods.action" method="post">
 		
 		  <div class="form-group">
 		    <%--<input type="hidden" name="method" value="searchgoods.action">--%>

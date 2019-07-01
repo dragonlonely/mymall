@@ -93,7 +93,7 @@ public class RedBagUtils {
 
         //累计单个红包的金额,最后这个数要和amount一致才对
         BigDecimal total = new BigDecimal(0);
-        List<BigDecimal> list = new ArrayList<>();
+        List<BigDecimal> list = new ArrayList<BigDecimal>();
         for (int i = 0; i < count; i++) {
             BigDecimal tem = getOneRedBag(amount.subtract(total), count - i);
             total = total.add(tem);

@@ -42,7 +42,7 @@ import java.util.List;
 /**
  * Created by jackiechan on 10/16/18/7:25 PM
  *
- * @Author jackiechan
+ * @Author jackiedragon
  */
 public interface GoodsMapper {
 

@@ -57,7 +57,7 @@ public class TestWeChat {
             aa[n] = mon;
         }
         //列表打乱数组aa中的顺序，实现抢红包的次序与红包金额匹配随机
-        List<Double> list = new ArrayList<>();
+        List<Double> list = new ArrayList<Double>();
         for(int i = 0; i < aa.length; i++)
         {
             list.add(aa[i]);

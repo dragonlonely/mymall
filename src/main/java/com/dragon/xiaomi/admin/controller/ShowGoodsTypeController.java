@@ -27,7 +27,7 @@ public class ShowGoodsTypeController {
 
     @RequestMapping("/getgoodstype")
     public String getGoodsType(HttpServletRequest request){
-        List<GoodsTypeVo> goodsTypeList=new ArrayList<>();
+        List<GoodsTypeVo> goodsTypeList=new ArrayList<GoodsTypeVo>();
         List<GoodsType> allGoodsType = goodsService.findAllGoodsType();
         for (GoodsType goodsType : allGoodsType) {
             GoodsTypeVo goodsTypeVo=new GoodsTypeVo();

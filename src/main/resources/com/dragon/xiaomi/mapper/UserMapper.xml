@@ -39,7 +39,7 @@
     </update>
 
     <select id="findAllUser" resultType="com.dragon.xiaomi.user.pojo.User" parameterType="string">
-        select id,username,password,email,gender,flag,role,code,phone from tb_user where username=#{username} and gender=#{gender}
+        select id,username,password,email,gender,flag,role,code,phone from tb_user where username=#{username} or gender=#{gender}
 
     </select>
 

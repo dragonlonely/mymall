@@ -55,7 +55,7 @@ public class PlaceholderUtils {
 
     public static void main(String[] args) {
         String aa= "亲爱的${name},您的验证码为${code},两分钟有效!";
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<String, String>();
         map.put("name","小强");
         map.put("code","123456");
         System.out.println(PlaceholderUtils.resolvePlaceholders(aa, map));

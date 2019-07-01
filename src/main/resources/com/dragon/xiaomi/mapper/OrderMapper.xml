@@ -34,11 +34,11 @@
     <select id="getOrder" resultType="com.dragon.xiaomi.order.pojo.Order">
         select id,uid,money,status,`time`,aid from tb_order
         <where>
-            <if test="userid != null">
+            <if test="userid != null and userid !=''">
                 and uid=#{userid}
             </if>
-            <if test="status != null">
-                or status=#{status}
+            <if test="status != null and status !=''">
+                and status=#{status}
             </if>
 
         </where>
